@@ -1,3 +1,4 @@
+import 'package:custom_design_system/custom_design_system.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmationDialog extends StatelessWidget {
@@ -26,9 +27,7 @@ class ConfirmationDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: onConfirm,
-          child: isLoading
-              ? const CircularProgressIndicator()
-              : const Text('Confirm'),
+          child: isLoading ? const DSLoading() : const Text('Confirm'),
         ),
       ],
     );

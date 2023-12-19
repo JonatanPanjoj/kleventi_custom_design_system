@@ -6,12 +6,12 @@ class DSDataTable extends StatelessWidget {
   final void Function(String) update;
   final void Function(String) delete;
   const DSDataTable({
-    Key? key,
+    super.key,
     required this.headers,
     required this.data,
     required this.update,
     required this.delete,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

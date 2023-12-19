@@ -60,7 +60,6 @@ class DSTypography {
     fontFamily: primaryFont,
     fontSize: 12.0,
     fontWeight: regular,
-    letterSpacing: 0.5,
     color: Colors.black,
   );
 }

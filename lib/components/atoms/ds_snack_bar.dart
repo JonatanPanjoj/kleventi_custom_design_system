@@ -12,7 +12,7 @@ class DsSnackBar extends SnackBar {
     content: Text(message),
     backgroundColor: _getBackgroundColor(context,status),
     behavior: SnackBarBehavior.floating,
-    width: MediaQuery.of(context).size.width * 0.5,
+    width: MediaQuery.of(context).size.width * 0.8,
   );
 
   static Color _getBackgroundColor(BuildContext context, SnackBarStatus status) {

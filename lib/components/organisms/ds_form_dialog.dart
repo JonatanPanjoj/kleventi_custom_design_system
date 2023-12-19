@@ -1,17 +1,16 @@
-import 'package:custom_design_system/components/atoms/ds_filled_button.dart';
 import 'package:custom_design_system/custom_design_system.dart';
 import 'package:flutter/material.dart';
 
 class DsFormDialog extends StatelessWidget {
   const DsFormDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.globalKey,
     required this.inputs,
     this.submit,
     this.isLoading = false,
     this.action = 'Create',
-  }) : super(key: key);
+  });
 
   final String title;
   final GlobalKey<FormState> globalKey;

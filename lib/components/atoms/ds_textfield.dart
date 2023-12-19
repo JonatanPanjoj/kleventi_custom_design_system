@@ -6,9 +6,12 @@ class DsTextField extends StatelessWidget {
   final DsInputType inputType;
   final String label;
   final Function(String)? onChanged;
+  final String? Function(String?)? validator;
   final Widget? prefix;
   final Widget? suffix;
   final TextEditingController? controller;
+  final bool? readOnly;
+  final bool? obscureText;
   // Include other properties as needed
 
   const DsTextField({
@@ -19,6 +22,9 @@ class DsTextField extends StatelessWidget {
     this.prefix,
     this.suffix,
     this.controller,
+    this.readOnly, 
+    this.validator, 
+    this.obscureText
     // Add other parameters as needed
   });
 
@@ -26,7 +32,7 @@ class DsTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (inputType) {
       case DsInputType.password:
-        return _buildTextField(context: context, obscureText: true);
+        return _buildTextField(context: context, obscureText: obscureText ?? true);
       case DsInputType.email:
         return _buildTextField(context: context, keyboardType: TextInputType.emailAddress);
       case DsInputType.number:
@@ -55,7 +61,9 @@ class DsTextField extends StatelessWidget {
     int? maxLines = 1,
     // Include other parameters as needed
   }) {
-    return TextField(
+    return TextFormField(
+      validator: validator,
+      readOnly: readOnly ?? false,
       controller: controller,
       onChanged: onChanged,
       obscureText: obscureText,
@@ -67,31 +75,17 @@ class DsTextField extends StatelessWidget {
   }
 
   InputDecoration _inputDecoration(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
 
     return InputDecoration(
       hintText: label,
-      // hintStyle: DSTypography.body.copyWith(color: DSColors.textDisabled),
       prefix: prefix,
       suffixIcon: suffix,
-      border: const OutlineInputBorder(
-        borderSide: BorderSide(
-          color: DSColors.textDisabled,
-          width: 1,
-        ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none
       ),
-      enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(
-          color: DSColors.textDisabled,
-          width: 1,
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: colors.primary,
-          width: 2.0,
-        ),
-      ),
+      filled: true,
+      fillColor: DSColors.card,
     );
   }
 }

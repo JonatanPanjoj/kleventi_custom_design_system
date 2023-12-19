@@ -1,23 +1,28 @@
+import 'package:custom_design_system/components/molecules/ds_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class DsDatePicker extends StatefulWidget {
   final String label;
-  final DateTime date;
-  final ValueChanged<DateTime> onDateChanged; // Añade un callback
+  final DateTime? date;
+  final bool? showTitle;
+  final String? Function(String?)? validator;
+  final ValueChanged<DateTime> onDateChanged;
 
   const DsDatePicker({
-    Key? key, 
-    required this.label, 
-    required this.date,
-    required this.onDateChanged, // Asegúrate de pasar el callback cuando creas el widget
-  }) : super(key: key);
+    super.key,
+    required this.label,
+    this.date,
+    this.showTitle,
+    this.validator,
+    required this.onDateChanged,
+  });
 
   @override
   State<DsDatePicker> createState() => _DsDatePickerState();
 }
 
 class _DsDatePickerState extends State<DsDatePicker> {
-  late DateTime selectedDate;
+  late DateTime? selectedDate;
 
   @override
   void initState() {
@@ -28,27 +33,69 @@ class _DsDatePickerState extends State<DsDatePicker> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label),
-        const SizedBox(height: 10,),
-        TextButton(
-          child: Text('${selectedDate.day}/${selectedDate.month}/${selectedDate.year}'),
-          onPressed: () async {
-            final DateTime? newDate = await showDatePicker(
-              context: context, 
-              initialDate: selectedDate, 
-              firstDate: DateTime(1980), 
-              lastDate: DateTime(2100)
-            );
-            if (newDate != null) {
-              setState(() {
-                selectedDate = newDate;
-              });
-              widget.onDateChanged(newDate); // Llama al callback con la nueva fecha
-            }
-          }, 
-        )
+        _buildTitle(),
+        _buildDatePicker(context),
       ],
     );
+  }
+
+  Widget _buildDatePicker(BuildContext context) {
+    return SizedBox(
+      height: 83,
+      width: double.infinity,
+      child: Stack(
+        children: [
+          DsInput(
+            label: _formatDate(),
+            showHeader: false,
+            validator: widget.validator,
+          ),
+          GestureDetector(
+            onTap: () async {
+              final DateTime? newDate = await showDatePicker(
+                  context: context,
+                  initialDate: selectedDate ?? DateTime.now(),
+                  firstDate: DateTime(1980),
+                  lastDate: DateTime(2100));
+              if (newDate != null) {
+                setState(() {
+                  selectedDate = newDate;
+                });
+                widget.onDateChanged(newDate);
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTitle() {
+    return widget.showTitle == false || widget.showTitle == null
+        ? const SizedBox()
+        : Column(
+            children: [
+              Text(
+                widget.label,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+            ],
+          );
+  }
+
+  String _formatDate() {
+    if (selectedDate == null) {
+      return 'Birth Date';
+    } else {
+      return '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}';
+    }
   }
 }
