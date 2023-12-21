@@ -7,6 +7,7 @@ class DsDatePicker extends StatefulWidget {
   final bool? showTitle;
   final String? Function(String?)? validator;
   final ValueChanged<DateTime> onDateChanged;
+  final Color? fillColor;
 
   const DsDatePicker({
     super.key,
@@ -15,6 +16,7 @@ class DsDatePicker extends StatefulWidget {
     this.showTitle,
     this.validator,
     required this.onDateChanged,
+    this.fillColor
   });
 
   @override
@@ -51,6 +53,7 @@ class _DsDatePickerState extends State<DsDatePicker> {
             label: _formatDate(),
             showHeader: false,
             validator: widget.validator,
+            fillColor: widget.fillColor,
           ),
           GestureDetector(
             onTap: () async {

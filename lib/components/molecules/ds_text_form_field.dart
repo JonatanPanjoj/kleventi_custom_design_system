@@ -27,6 +27,7 @@ class DsInput extends StatefulWidget {
   final TextEditingController? controller;
   final bool? readOnly;
   final bool? obscureText;
+  final Color? fillColor;
 
   const DsInput({
     super.key,
@@ -39,7 +40,8 @@ class DsInput extends StatefulWidget {
     this.controller,
     this.readOnly, 
     this.validator, 
-    this.obscureText
+    this.obscureText,
+    this.fillColor
   });
   @override
   State<DsInput> createState() => _DsInputState();
@@ -67,6 +69,7 @@ class _DsInputState extends State<DsInput> {
           suffix: widget.suffix,
           readOnly: widget.readOnly,
           obscureText: widget.obscureText,
+          fillColor: widget.fillColor,
         ),
       ],
     );

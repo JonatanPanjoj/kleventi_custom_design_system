@@ -12,6 +12,7 @@ class DsTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool? readOnly;
   final bool? obscureText;
+  final Color? fillColor;
   // Include other properties as needed
 
   const DsTextField({
@@ -24,7 +25,8 @@ class DsTextField extends StatelessWidget {
     this.controller,
     this.readOnly, 
     this.validator, 
-    this.obscureText
+    this.obscureText,
+    this.fillColor
     // Add other parameters as needed
   });
 
@@ -85,7 +87,7 @@ class DsTextField extends StatelessWidget {
         borderSide: BorderSide.none
       ),
       filled: true,
-      fillColor: DSColors.card,
+      fillColor: fillColor ?? DSColors.card,
     );
   }
 }
