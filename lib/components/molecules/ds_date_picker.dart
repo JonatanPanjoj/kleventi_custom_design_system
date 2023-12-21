@@ -96,7 +96,7 @@ class _DsDatePickerState extends State<DsDatePicker> {
 
   String _formatDate() {
     if (selectedDate == null) {
-      return 'Birth Date';
+      return widget.label;
     } else {
       return '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}';
     }
