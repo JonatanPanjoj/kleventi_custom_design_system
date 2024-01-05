@@ -25,6 +25,7 @@ class DsFormDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: backgroundColor,
+      surfaceTintColor: backgroundColor,
       title: Text(title),
       content: SizedBox(
         width: 500.0,
