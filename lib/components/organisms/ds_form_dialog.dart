@@ -10,6 +10,7 @@ class DsFormDialog extends StatelessWidget {
     this.submit,
     this.isLoading = false,
     this.action = 'Create',
+    this.backgroundColor,
   });
 
   final String title;
@@ -18,10 +19,12 @@ class DsFormDialog extends StatelessWidget {
   final VoidCallback? submit;
   final bool isLoading;
   final String action;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: backgroundColor,
       title: Text(title),
       content: SizedBox(
         width: 500.0,
