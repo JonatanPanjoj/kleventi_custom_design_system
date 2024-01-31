@@ -21,13 +21,16 @@ class ConfirmationDialog extends StatelessWidget {
       title: Text(title),
       content: Text(content),
       actions: [
-        TextButton(
+        DsFilledButton(
+          variant: FilledButtonVariant.cancel,
+          label: 'Cancel',
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
         ),
-        TextButton(
+        DsFilledButton(
+          variant: FilledButtonVariant.cancel,
+          label: 'Confirm',
+          isLoading: isLoading,
           onPressed: onConfirm,
-          child: isLoading ? const DSLoading() : const Text('Confirm'),
         ),
       ],
     );
