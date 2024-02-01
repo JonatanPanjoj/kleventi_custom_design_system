@@ -27,7 +27,6 @@ class ConfirmationDialog extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         DsFilledButton(
-          variant: FilledButtonVariant.cancel,
           label: 'Confirm',
           isLoading: isLoading,
           onPressed: onConfirm,
